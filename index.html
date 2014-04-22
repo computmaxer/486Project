@@ -1,0 +1,183 @@
+<html>
+	<head>
+		<title>Marantz NR1504</title>
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <!--<link href="{{ url_for('static', filename='css/simple-slider.css') }}" rel="stylesheet">-->
+        <link href="{{ url_for('static', filename='css/simple-slider-volume.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+	</head>
+	<body>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Marantz NR1504</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#">Power ON</a></li>
+                        <li class=""><a href="#">Power OFF</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 80px;">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Volume</h3>
+                        </div>
+                        <div id="volume_value" class="h1 center-block" style="width: 50px; text-align: center; margin-top: 10px;">0</div>
+                        <div class="panel-body">
+                            <button class="btn btn-primary volume" id="volume_down">-</button>
+                            <div class="volume-bar">
+                                <input id="volume-slide" type="text" data-slider="true"
+                                       data-slider-theme="volume" data-slider-range="0,79"
+                                       data-slider-step="0.5" data-slider-snap="true"
+                                       data-slider-highlight="true" />
+                            </div>
+                            <button class="btn btn-primary volume" style="margin-left: 10px;" id="volume_up">+</button>
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Source</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="toggle_sources" data-toggle="buttons">
+                                <label class="btn btn-primary" id="source_roku">
+                                    <input type="radio" name="source"> Roku
+                                </label>
+                                <label class="btn btn-primary" id="source_xbox">
+                                    <input type="radio" name="source"> XBox
+                                </label>
+                                <label class="btn btn-primary" id="source_BD">
+                                    <input type="radio" name="source"> Apple TV
+                                </label>
+                                <br />
+                                <br />
+                                <label class="btn btn-primary" id="source_chromecast">
+                                    <input type="radio" name="source"> Chromecast
+                                </label>
+                                <label class="btn btn-primary" id="source_aux">
+                                    <input type="radio" name="source"> Aux
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                  <div class="panel panel-danger">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content
+                    </div>
+                  </div>
+                </div><!-- /.col-sm-4 -->
+            </div>
+
+
+
+            <div class="page-header">
+                <h1>Wells</h1>
+            </div>
+            <div class="well">
+                <p>
+                    <div id="input_source" style="font-size: 56px;"></div>
+                </p>
+            </div>
+
+        </div>
+
+
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/simple-slider.min.js') }}"></script>
+		<script type="text/javascript">
+            var slider = $("#volume-slide");
+            slider.simpleSlider();
+
+            slider.bind("slider:changed", function (event, data) {
+                var vol = "PutMasterVolumeSet/" + (data.value - 80.0);
+                console.log(vol);
+                setVolume(vol);
+                setTimeout(function(){
+                    updateInfo(false);
+                }, 50);
+
+            });
+
+            $("#toggle_sources > .btn").on('click', function(event){
+                var selected_source = $(this).attr('id');
+                if(selected_source == 'source_roku'){
+
+                }
+                else if(selected_source == 'source_xbox'){
+
+                }
+            });
+
+
+			$(document).ready(function(){
+				$.cookie("ZoneName", "MAIN%20ZONE");
+				updateInfo(true);
+
+				$('.volume').bind('click', function(event){
+                    var that = $(this);
+                    var action;
+                    if (that.attr('id') == 'volume_up'){
+                        action = "PutMasterVolumeBtn/>";
+                    }
+                    else if(that.attr('id') == 'volume_down'){
+                        action = "PutMasterVolumeBtn/<"
+                    }
+                    setVolume(action);
+                    updateInfo(true);
+				});
+
+			});
+
+            function setVolume(vol) {
+                var that = $(this);
+                that.attr('disabled', 'disabled');
+                sendCmd(vol, function(){
+                    that.removeAttr('disabled');
+                });
+            }
+
+			function updateInfo(set_slider){
+				$.ajax({
+					url: "/data/",
+					type: "GET",
+					dataType: "json",
+					success: function(data,status){
+						$("#input_source").html(data.input_source);
+                        var vol = parseFloat(data.volume);
+                        $("#volume_value").html(vol);
+                        if(set_slider){
+                            slider.simpleSlider("setValue", vol);
+                        }
+					}
+				});
+			}
+
+            function sendCmd(cmd, callback) {
+                $.post("http://172.16.2.220/MainZone/index.put.asp", {cmd0: cmd}, {crossdomain: true}).always(callback);
+            }
+
+		</script>
+	</body>
+</html>
