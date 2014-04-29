@@ -204,6 +204,10 @@
                 $.post("{{ roku_ip }}/keypress/play");
             });
 
+            $("#roku-select").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/select");
+            });
+
 			$(document).ready(function(){
 				$.cookie("ZoneName", "MAIN%20ZONE");
 				updateInfo(true);
