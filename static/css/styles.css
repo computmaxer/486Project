@@ -1,0 +1,28 @@
+/*.volume-slider {*/
+    /*height: 11px;*/
+    /*background: #787878;*/
+    /*background: -moz-linear-gradient(top, #787878, #a2a2a2);*/
+    /*background: -webkit-linear-gradient(top, #787878, #a2a2a2);*/
+    /*background: linear-gradient(top, #787878, #a2a2a2);*/
+    /*-moz-box-shadow: inset 0 2px 5px 1px rgba(0,0,0,0.15), 0 1px 0px 0px rgba(230,230,230,0.9), inset 0 0 1px 1px rgba(0,0,0,0.2);*/
+    /*-webkit-box-shadow: inset 0 2px 5px 1px rgba(0,0,0,0.15), 0 1px 0px 0px rgba(230,230,230,0.9), inset 0 0 1px 1px rgba(0,0,0,0.2);*/
+    /*box-shadow: inset 0 2px 5px 1px rgba(0,0,0,0.15), 0 1px 0px 0px rgba(230,230,230,0.9), inset 0 0 1px 1px rgba(0,0,0,0.2);*/
+    /*-moz-border-radius: 5px;*/
+    /*-webkit-border-radius: 5px;*/
+    /*border-radius: 5px;*/
+
+    /*width: 65%;*/
+    /*position: absolute;*/
+    /*top: 52%;*/
+/*}*/
+
+/*.volume-indicator {*/
+    /*background-color: #5cb85c;*/
+    /*position: absolute;*/
+    /*top: 50%;*/
+/*}*/
+
+.volume-bar {
+    display: inline-block;
+    width: 74%;
+}
