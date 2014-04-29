@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Marantz NR1504</title>
+		<title>Max's Apartment</title>
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
         <!--<link href="{{ url_for('static', filename='css/simple-slider.css') }}" rel="stylesheet">-->
         <link href="{{ url_for('static', filename='css/simple-slider-volume.css') }}" rel="stylesheet">
@@ -16,7 +16,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Marantz NR1504</a>
+                    <a class="navbar-brand" href="#">Max's Apartment</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -30,9 +30,9 @@
         <div class="container" style="margin-top: 80px;">
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Volume</h3>
+                            <h3 class="panel-title">Receiver</h3>
                         </div>
                         <div id="volume_value" class="h1 center-block" style="width: 50px; text-align: center; margin-top: 10px;">0</div>
                         <div class="panel-body">
@@ -44,61 +44,89 @@
                                        data-slider-highlight="true" />
                             </div>
                             <button class="btn btn-primary volume" style="margin-left: 10px;" id="volume_up">+</button>
+
+                            <div style="text-align: center; margin-top: 20px;">
+
+                                <div class="btn-group" id="toggle_sources" data-toggle="buttons">
+                                    <label class="btn btn-primary" id="source_roku">
+                                        <input type="radio" name="source"> Roku
+                                    </label>
+                                    <label class="btn btn-primary" id="source_chromecast">
+                                        <input type="radio" name="source"> Chromecast
+                                    </label>
+                                    <label class="btn btn-primary" id="source_aux">
+                                        <input type="radio" name="source"> Aux
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div><!-- /.col-sm-4 -->
+
+                <div class="col-sm-8">
+                    <div class="page-header" style="margin-top: 0px;">
+                        <h1>Status</h1>
+                    </div>
+                    <div class="well">
+
+                    </div>
+                </div> 
+            </div>
+
+            <div class="row">
                 <div class="col-sm-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Source</h3>
+                            <h3 class="panel-title">Roku</h3>
                         </div>
-                        <div class="panel-body">
-                            <div id="toggle_sources" data-toggle="buttons">
-                                <label class="btn btn-primary" id="source_roku">
-                                    <input type="radio" name="source"> Roku
-                                </label>
-                                <label class="btn btn-primary" id="source_xbox">
-                                    <input type="radio" name="source"> XBox
-                                </label>
-                                <label class="btn btn-primary" id="source_BD">
-                                    <input type="radio" name="source"> Apple TV
-                                </label>
-                                <br />
-                                <br />
-                                <label class="btn btn-primary" id="source_chromecast">
-                                    <input type="radio" name="source"> Chromecast
-                                </label>
-                                <label class="btn btn-primary" id="source_aux">
-                                    <input type="radio" name="source"> Aux
-                                </label>
+                        <div class="panel-body" style="text-align: center">
+                            <div class="row">
+                                <div class="col-sm-12" style="text-align: center">
+                                    <div class="btn-group">
+                                        <button id="roku-back" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                                        <button id="roku-home" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span></button>
+                                    </div>
+                                </div>
                             </div>
-
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
+                                    <button id="roku-left" id="roku-up" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 col-sm-offset-3" style="text-align: center">
+                                    <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                                </div>
+                                <div class="col-sm-3" style="text-align: center">
+                                    <button id="roku-right" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
+                                    <button id="roku-down" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-12" style="text-align: center">
+                                    <div class="btn-group">
+                                        <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-repeat"></span></button>
+                                        <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-asterisk"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-sm-12">
+                                    <div class="btn-group">
+                                        <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-backward"></span></button>
+                                        <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-play"></span></button>
+                                        <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-forward"></span></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div><!-- /.col-sm-4 -->
-                <div class="col-sm-4">
-                  <div class="panel panel-danger">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Panel title</h3>
-                    </div>
-                    <div class="panel-body">
-                      Panel content
-                    </div>
-                  </div>
-                </div><!-- /.col-sm-4 -->
             </div>
-
-
-
-            <div class="page-header">
-                <h1>Wells</h1>
-            </div>
-            <div class="well">
-                <p>
-                    <div id="input_source" style="font-size: 56px;"></div>
-                </p>
-            </div>
-
         </div>
 
 
@@ -130,6 +158,49 @@
                 }
             });
 
+            $("#roku-back").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/back");
+            });
+
+            $("#roku-home").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/home");
+            });
+
+            $("#roku-up").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/up");
+            });
+
+            $("#roku-down").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/down");
+            });
+
+            $("#roku-left").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/left");
+            });
+
+            $("#roku-right").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/right");
+            });
+
+            $("#roku-instantreplay").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/instantreplay");
+            });
+
+            $("#roku-info").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/info");
+            });
+
+            $("#roku-rev").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/rev");
+            });
+
+            $("#roku-fwd").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/fwd");
+            });
+
+            $("#roku-play").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/play");
+            });
 
 			$(document).ready(function(){
 				$.cookie("ZoneName", "MAIN%20ZONE");
