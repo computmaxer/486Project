@@ -5,6 +5,27 @@
         <!--<link href="{{ url_for('static', filename='css/simple-slider.css') }}" rel="stylesheet">-->
         <link href="{{ url_for('static', filename='css/simple-slider-volume.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+        <style>
+
+            .btn-group-wide {
+                width: 100%;
+            }
+
+            .btn-up {
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
+                border-bottom: 0px;
+            }
+
+            .btn-down {
+                border-top-right-radius: 0;
+                border-top-left-radius: 0;
+                border-top: 0px;
+            }
+
+        </style>
+
 	</head>
 	<body>
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -47,15 +68,27 @@
 
                             <div style="text-align: center; margin-top: 20px;">
 
-                                <div class="btn-group" id="toggle_sources" data-toggle="buttons">
-                                    <label class="btn btn-primary" id="source_roku">
-                                        <input type="radio" name="source"> Roku
+                                <div class="btn-group-vertical btn-group-wide" id="toggle_sources" data-toggle="buttons">
+                                    <label id="input_roku_label" class="btn btn-primary btn-block" id="source_roku">
+                                        <input id="input_roku" type="radio" name="source"> Roku
                                     </label>
-                                    <label class="btn btn-primary" id="source_chromecast">
-                                        <input type="radio" name="source"> Chromecast
+                                    <label id="input_ps2_label" class="btn btn-primary" id="source_roku">
+                                        <input id="input_ps2" type="radio" name="source"> PS2
                                     </label>
-                                    <label class="btn btn-primary" id="source_aux">
-                                        <input type="radio" name="source"> Aux
+                                    <label id="input_xbox_label" class="btn btn-primary" id="source_roku">
+                                        <input id="input_xbox" type="radio" name="source"> Xbox
+                                    </label>
+                                    <label id="input_atv_label" class="btn btn-primary" id="source_roku">
+                                        <input id="input_atv" type="radio" name="source"> AppleTV
+                                    </label>
+                                    <label id="input_chromecast_label" class="btn btn-primary" id="source_chromecast">
+                                        <input id="input_chromecast" type="radio" name="source"> Chromecast
+                                    </label>
+                                    <label id="input_network_label" class="btn btn-primary" id="source_chromecast">
+                                        <input id="input_network" type="radio" name="source"> Network
+                                    </label>
+                                    <label id="input_aux_label" class="btn btn-primary" id="source_aux">
+                                        <input id="input_aux" type="radio" name="source"> Aux
                                     </label>
                                 </div>
                             </div>
@@ -67,9 +100,11 @@
                     <div class="page-header" style="margin-top: 0px;">
                         <h1>Status</h1>
                     </div>
-                    <div class="well">
-
-                    </div>
+                    <table class="table">
+                    <tr>
+                        <td>Input</td>
+                        <td id="table_input"></td>
+                    </table>
                 </div> 
             </div>
 
@@ -90,7 +125,7 @@
                             </div>
                             <div class="row" style="margin-top: 20px;">
                                 <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
-                                    <button id="roku-up" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                                    <button id="roku-up" class="btn btn-default btn-lg btn-up"><span class="glyphicon glyphicon-chevron-up"></span></button>
                                 </div>
                             </div>
                             <div class="row">
@@ -105,7 +140,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
-                                    <button id="roku-down" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                    <button id="roku-down" class="btn btn-default btn-lg btn-down"><span class="glyphicon glyphicon-chevron-down"></span></button>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 20px;">
@@ -224,7 +259,6 @@
                     setVolume(action);
                     updateInfo(true);
 				});
-
 			});
 
             function setVolume(vol) {
@@ -241,15 +275,40 @@
 					type: "GET",
 					dataType: "json",
 					success: function(data,status){
-						$("#input_source").html(data.input_source);
+						
                         var vol = parseFloat(data.volume);
+                        var input_source = data.input_source;
+
                         $("#volume_value").html(vol);
                         if(set_slider){
                             slider.simpleSlider("setValue", vol);
                         }
+
+                        $("#input_source").html(input_source);
+                        $("#table_input").html(input_source);
+
+                        if (input_source === "CBL/SAT"){
+                            $("#input_roku_label").addClass("active");
+                        } else if (input_source === "Blu-ray/DVD") {
+                            $("#input_ps2_label").addClass("active");
+                        } else if (input_source === "GAME") {
+                            $("#input_xbox_label").addClass("active");
+                        } else if (input_source === "CD") {
+                            $("#input_atv_label").addClass("active");
+                        } else if (input_source === "MEDIA PLAYER") {
+                            $("#input_chromecast_label").addClass("active");
+                        } else if (input_source === "NETWORK") {
+                            $("#input_network_label").addClass("active");
+                        } else if (input_source === "TV AUDIO") {
+                            $("#input_aux_label").addClass("active");
+                        }
 					}
 				});
 			}
+
+            function removeActive(){
+                $("label.btn").removeClass('active');
+            }
 
             function sendCmd(cmd, callback) {
                 $.post("http://172.16.2.220/MainZone/index.put.asp", {cmd0: cmd}, {crossdomain: true}).always(callback);
