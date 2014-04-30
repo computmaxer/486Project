@@ -12,6 +12,18 @@
                 width: 100%;
             }
 
+            .btn-up {
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
+                border-bottom: 0px;
+            }
+
+            .btn-down {
+                border-top-right-radius: 0;
+                border-top-left-radius: 0;
+                border-top: 0px;
+            }
+
         </style>
 
 	</head>
@@ -113,7 +125,7 @@
                             </div>
                             <div class="row" style="margin-top: 20px;">
                                 <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
-                                    <button id="roku-up" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                                    <button id="roku-up" class="btn btn-default btn-lg btn-up"><span class="glyphicon glyphicon-chevron-up"></span></button>
                                 </div>
                             </div>
                             <div class="row">
@@ -128,7 +140,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
-                                    <button id="roku-down" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                    <button id="roku-down" class="btn btn-default btn-lg btn-down"><span class="glyphicon glyphicon-chevron-down"></span></button>
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 20px;">
@@ -289,6 +301,10 @@
 					}
 				});
 			}
+
+            function removeActive(){
+                $("label.btn").removeClass('active');
+            }
 
             function sendCmd(cmd, callback) {
                 $.post("http://172.16.2.220/MainZone/index.put.asp", {cmd0: cmd}, {crossdomain: true}).always(callback);
