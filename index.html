@@ -345,9 +345,7 @@
             }
 
 			function updateInfo(set_slider){
-                $('.power-button').each(function(index, value){
-                    $(this).parent().removeClass('active');
-                });
+                
 				$.ajax({
 					url: "/data/",
 					type: "GET",
@@ -358,6 +356,12 @@
                         var input_source = data.input_source;
                         var power_status = data.power_status;
                         var sound_mode = data.sound_mode;
+
+                        if (!$("#power-" + power_status).parent().hasClass('active')) {
+                            $('.power-button').each(function(index, value){
+                                $(this).parent().removeClass('active');
+                            });   
+                        }
 
                         $("#power-" + power_status).parent().addClass('active');
 
