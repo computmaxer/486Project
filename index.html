@@ -1,4 +1,4 @@
-<html>
+    <html>
 	<head>
 		<title>Max's Apartment</title>
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
@@ -70,25 +70,25 @@
 
                                 <div class="btn-group-vertical btn-group-wide" id="toggle_sources" data-toggle="buttons">
                                     <label id="input_roku_label" class="btn btn-primary btn-block" id="source_roku">
-                                        <input id="input_roku" type="radio" name="source"> Roku
+                                        <input id="input_roku" type="radio" name="source" value="SAT/CBL"> Roku
                                     </label>
                                     <label id="input_ps2_label" class="btn btn-primary" id="source_roku">
-                                        <input id="input_ps2" type="radio" name="source"> PS2
+                                        <input id="input_ps2" type="radio" name="source" value="BD"> PS2
                                     </label>
                                     <label id="input_xbox_label" class="btn btn-primary" id="source_roku">
-                                        <input id="input_xbox" type="radio" name="source"> Xbox
+                                        <input id="input_xbox" type="radio" name="source" value="GAME"> Xbox
                                     </label>
                                     <label id="input_atv_label" class="btn btn-primary" id="source_roku">
-                                        <input id="input_atv" type="radio" name="source"> AppleTV
+                                        <input id="input_atv" type="radio" name="source" value="CD"> AppleTV
                                     </label>
                                     <label id="input_chromecast_label" class="btn btn-primary" id="source_chromecast">
-                                        <input id="input_chromecast" type="radio" name="source"> Chromecast
+                                        <input id="input_chromecast" type="radio" name="source" name="MPLAY"> Chromecast
                                     </label>
                                     <label id="input_network_label" class="btn btn-primary" id="source_chromecast">
-                                        <input id="input_network" type="radio" name="source"> Network
+                                        <input id="input_network" type="radio" name="source" value="NETHOME"> Network
                                     </label>
                                     <label id="input_aux_label" class="btn btn-primary" id="source_aux">
-                                        <input id="input_aux" type="radio" name="source"> Aux
+                                        <input id="input_aux" type="radio" name="source" value="AUX1"> Aux
                                     </label>
                                 </div>
                             </div>
@@ -219,6 +219,10 @@
                 $.post("{{ roku_ip }}/keypress/right");
             });
 
+            $("#roku-select").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/select");
+            });
+
             $("#roku-instantreplay").on('click', function(event){
                 $.post("{{ roku_ip }}/keypress/instantreplay");
             });
@@ -287,11 +291,11 @@
                         $("#input_source").html(input_source);
                         $("#table_input").html(input_source);
 
-                        if (input_source === "CBL/SAT"){
+                        if (input_source === "Roku"){
                             $("#input_roku_label").addClass("active");
-                        } else if (input_source === "Blu-ray/DVD") {
+                        } else if (input_source === "PS 2") {
                             $("#input_ps2_label").addClass("active");
-                        } else if (input_source === "GAME") {
+                        } else if (input_source === "XBOX") {
                             $("#input_xbox_label").addClass("active");
                         } else if (input_source === "CD") {
                             $("#input_atv_label").addClass("active");
