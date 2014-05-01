@@ -69,25 +69,25 @@
                             <div style="text-align: center; margin-top: 20px;">
 
                                 <div class="btn-group-vertical btn-group-wide" id="toggle_sources" data-toggle="buttons">
-                                    <label id="SAT/CBL" class="btn btn-primary btn-block input_select">
+                                    <label id="SAT" class="btn btn-primary btn-block input_select">
                                         <input id="input_roku" type="radio" name="source" value="SAT/CBL"> Roku
                                     </label>
-                                    <label id="BD" class="btn btn-primary input_select" id="source_roku" data="BD">
+                                    <label id="BD" class="btn btn-primary input_select">
                                         <input id="input_ps2" type="radio" name="source" value="BD"> PS2
                                     </label>
-                                    <label id="GAME" class="btn btn-primary input_select" id="source_roku">
+                                    <label id="GAME" class="btn btn-primary input_select">
                                         <input id="input_xbox" type="radio" name="source" value="GAME"> Xbox
                                     </label>
-                                    <label id="CD" class="btn btn-primary input_select" id="source_roku">
+                                    <label id="CD" class="btn btn-primary input_select">
                                         <input id="input_atv" type="radio" name="source" value="CD"> AppleTV
                                     </label>
-                                    <label id="MPLAY" class="btn btn-primary input_select" id="source_chromecast">
+                                    <label id="MPLAY" class="btn btn-primary input_select">
                                         <input id="input_chromecast" type="radio" name="source" name="MPLAY"> Chromecast
                                     </label>
-                                    <label id="NETHOME" class="btn btn-primary input_select" id="source_chromecast">
+                                    <label id="NETHOME" class="btn btn-primary input_select">
                                         <input id="input_network" type="radio" name="source" value="NETHOME"> Network
                                     </label>
-                                    <label id="AUX1" class="btn btn-primary input_select" id="source_aux">
+                                    <label id="AUX1" class="btn btn-primary input_select">
                                         <input id="input_aux" type="radio" name="source" value="AUX1"> Aux
                                     </label>
                                 </div>
@@ -185,18 +185,21 @@
 
             });
 
-            $("#toggle_sources > .btn").on('click', function(event){
-                var selected_source = $(this).attr('id');
-                if(selected_source == 'source_roku'){
-
-                }
-                else if(selected_source == 'source_xbox'){
-
-                }
-            });
-
             $('.input_select').on('click', function(event){
-                $.post("/set_source/", {"source": event.currentTarget.id})
+
+                var input = event.currentTarget.id;
+                if (input === "SAT") {
+                    input = "SAT/CBL";
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/set_source/',
+                    data: JSON.stringify({"source": input}),
+                    success: setTimeout(function(){updateInfo(false)}, 100),
+                    contentType: "application/json",
+                    dataType: 'json'
+                });
             });
 
             $("#roku-back").on('click', function(event){
@@ -223,7 +226,7 @@
                 $.post("{{ roku_ip }}/keypress/right");
             });
 
-            $("#roku-select").on('click', function(event){
+            $("#roku-select").on('c', function(event){
                 $.post("{{ roku_ip }}/keypress/select");
             });
 
@@ -295,28 +298,26 @@
                         $("#input_source").html(input_source);
                         $("#table_input").html(input_source);
 
+
                         if (input_source === "Roku"){
-                            $("#input_roku_label").addClass("active");
+                            console.log("boom");
+                            $("#SAT").addClass("active");
                         } else if (input_source === "PS 2") {
-                            $("#input_ps2_label").addClass("active");
+                            $("#BD").addClass("active");
                         } else if (input_source === "XBOX") {
-                            $("#input_xbox_label").addClass("active");
-                        } else if (input_source === "CD") {
-                            $("#input_atv_label").addClass("active");
+                            $("#GAME").addClass("active");
+                        } else if (input_source === "Apple TV") {
+                            $("#CD").addClass("active");
                         } else if (input_source === "ChromeCast") {
-                            $("#input_chromecast_label").addClass("active");
+                            $("#MPLAY").addClass("active");
                         } else if (input_source === "NETWORK") {
-                            $("#input_network_label").addClass("active");
+                            $("#NETHOME").addClass("active");
                         } else if (input_source === "Front") {
-                            $("#input_aux_label").addClass("active");
+                            $("#AUX1").addClass("active");
                         }
 					}
 				});
 			}
-
-            function removeActive(){
-                $("label.btn").removeClass('active');
-            }
 
             function sendCmd(cmd, callback) {
                 $.post("http://172.16.2.220/MainZone/index.put.asp", {cmd0: cmd}, {crossdomain: true}).always(callback);
