@@ -55,72 +55,135 @@
         <div class="container" style="margin-top: 80px;">
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Receiver</h3>
-                        </div>
-                        <div id="volume_value" class="h1 center-block" style="width: 50px; text-align: center; margin-top: 10px;">0</div>
-                        <div class="panel-body">
 
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-primary volume" id="volume_down">-</button>
-                                        <div class="volume-bar">
-                                            <input id="volume-slide" type="text" data-slider="true"
-                                                   data-slider-theme="volume" data-slider-range="0,79"
-                                                   data-slider-step="0.5" data-slider-snap="true"
-                                                   data-slider-highlight="true" />
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Receiver</h3>
+                                </div>
+                                <div id="volume_value" class="h1 center-block" style="width: 50px; text-align: center; margin-top: 10px;">0</div>
+                                <div class="panel-body">
+
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-primary volume" id="volume_down">-</button>
+                                                <div class="volume-bar">
+                                                    <input id="volume-slide" type="text" data-slider="true"
+                                                           data-slider-theme="volume" data-slider-range="0,79"
+                                                           data-slider-step="0.5" data-slider-snap="true"
+                                                           data-slider-highlight="true" />
+                                                </div>
+                                                <button class="btn btn-primary volume" style="margin-left: 10px;" id="volume_up">+</button>
+                                            </div>
                                         </div>
-                                        <button class="btn btn-primary volume" style="margin-left: 10px;" id="volume_up">+</button>
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col-sm-6">
+                                                <h4 class="center">Source Select</h4>
+                                                <div class="btn-group-vertical btn-group-wide" id="toggle_sources" data-toggle="buttons">
+                                                    <label id="SAT" class="btn btn-primary btn-block input_select">
+                                                        <input id="input_roku" type="radio" name="source" value="SAT/CBL"> Roku
+                                                    </label>
+                                                    <label id="BD" class="btn btn-primary input_select">
+                                                        <input id="input_ps2" type="radio" name="source" value="BD"> PS2
+                                                    </label>
+                                                    <label id="GAME" class="btn btn-primary input_select">
+                                                        <input id="input_xbox" type="radio" name="source" value="GAME"> Xbox
+                                                    </label>
+                                                    <label id="CD" class="btn btn-primary input_select">
+                                                        <input id="input_atv" type="radio" name="source" value="CD"> AppleTV
+                                                    </label>
+                                                    <label id="MPLAY" class="btn btn-primary input_select">
+                                                        <input id="input_chromecast" type="radio" name="source" name="MPLAY"> Chromecast
+                                                    </label>
+                                                    <label id="NETHOME" class="btn btn-primary input_select">
+                                                        <input id="input_network" type="radio" name="source" value="NETHOME"> Network
+                                                    </label>
+                                                    <label id="AUX1" class="btn btn-primary input_select">
+                                                        <input id="input_aux" type="radio" name="source" value="AUX1"> Aux
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4 class="center">Sound Mode</h4>
+                                                <div class="btn-group-vertical btn-group-wide" id="toggle_sound_mode" data-toggle="buttons">
+                                                    <label id="sound_mode_auto_label" class="btn btn-primary sound_mode">
+                                                        <input id="sound_mode_auto" type="radio" name="sound_mode" value="AUTO"> Auto
+                                                    </label>
+                                                    <label id="sound_mode_stereo_label" class="btn btn-primary sound_mode">
+                                                        <input id="sound_mode_stereo" type="radio" name="sound_mode" value="STEREO"> Stereo
+                                                    </label>
+                                                    <label id="sound_mode_multi_label" class="btn btn-primary sound_mode">
+                                                        <input id="sound_mode_multi" type="radio" name="sound_mode" value="MULTI"> MultiCh Stereo
+                                                    </label>
+                                                    <label id="sound_mode_virtual_label" class="btn btn-primary sound_mode">
+                                                        <input id="sound_mode_virtual" type="radio" name="sound_mode" value="VIRTUAL"> Virtual
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-sm-6">
-                                        <h4 class="center">Source Select</h4>
-                                        <div class="btn-group-vertical btn-group-wide" id="toggle_sources" data-toggle="buttons">
-                                            <label id="SAT" class="btn btn-primary btn-block input_select">
-                                                <input id="input_roku" type="radio" name="source" value="SAT/CBL"> Roku
-                                            </label>
-                                            <label id="BD" class="btn btn-primary input_select">
-                                                <input id="input_ps2" type="radio" name="source" value="BD"> PS2
-                                            </label>
-                                            <label id="GAME" class="btn btn-primary input_select">
-                                                <input id="input_xbox" type="radio" name="source" value="GAME"> Xbox
-                                            </label>
-                                            <label id="CD" class="btn btn-primary input_select">
-                                                <input id="input_atv" type="radio" name="source" value="CD"> AppleTV
-                                            </label>
-                                            <label id="MPLAY" class="btn btn-primary input_select">
-                                                <input id="input_chromecast" type="radio" name="source" name="MPLAY"> Chromecast
-                                            </label>
-                                            <label id="NETHOME" class="btn btn-primary input_select">
-                                                <input id="input_network" type="radio" name="source" value="NETHOME"> Network
-                                            </label>
-                                            <label id="AUX1" class="btn btn-primary input_select">
-                                                <input id="input_aux" type="radio" name="source" value="AUX1"> Aux
-                                            </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Roku</h3>
+                                </div>
+                                <div class="panel-body" style="text-align: center">
+                                    <div class="row">
+                                        <div class="col-sm-12" style="text-align: center">
+                                            <div class="btn-group">
+                                                <button id="roku-back" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                                                <button id="roku-home" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span></button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <h4 class="center">Sound Mode</h4>
-                                        <div class="btn-group-vertical btn-group-wide" id="toggle_sound_mode" data-toggle="buttons">
-                                            <label id="sound_mode_auto_label" class="btn btn-primary sound_mode">
-                                                <input id="sound_mode_auto" type="radio" name="sound_mode" value="AUTO"> Auto
-                                            </label>
-                                            <label id="sound_mode_stereo_label" class="btn btn-primary sound_mode">
-                                                <input id="sound_mode_stereo" type="radio" name="sound_mode" value="STEREO"> Stereo
-                                            </label>
-                                            <label id="sound_mode_multi_label" class="btn btn-primary sound_mode">
-                                                <input id="sound_mode_multi" type="radio" name="sound_mode" value="MULTI"> MultiCh Stereo
-                                            </label>
-                                            <label id="sound_mode_virtual_label" class="btn btn-primary sound_mode">
-                                                <input id="sound_mode_virtual" type="radio" name="sound_mode" value="VIRTUAL"> Virtual
-                                            </label>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
+                                            <button id="roku-up" class="btn btn-default btn-lg btn-up"><span class="glyphicon glyphicon-chevron-up"></span></button>
                                         </div>
-
                                     </div>
+                                    <div class="row">
 
+                                        <div class="col-sm-12">
+                                            <div class="btn-group">
+                                                <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                                                <button id="roku-select" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
+                                                <button id="roku-right" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
+                                            <button id="roku-down" class="btn btn-default btn-lg btn-down"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-12" style="text-align: center">
+                                            <div class="btn-group">
+                                                <button id="roku-instantreplay" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-repeat"></span></button>
+                                                <button id="roku-info" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-asterisk"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px;">
+                                        <div class="col-sm-12">
+                                            <div class="btn-group">
+                                                <button id="roku-rev" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-backward"></span></button>
+                                                <button id="roku-play" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-play"></span></button>
+                                                <button id="roku-fwd" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-forward"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,58 +204,7 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Roku</h3>
-                        </div>
-                        <div class="panel-body" style="text-align: center">
-                            <div class="row">
-                                <div class="col-sm-12" style="text-align: center">
-                                    <div class="btn-group">
-                                        <button id="roku-back" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-left"></span></button>
-                                        <button id="roku-home" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 20px;">
-                                <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
-                                    <button id="roku-up" class="btn btn-default btn-lg btn-up"><span class="glyphicon glyphicon-chevron-up"></span></button>
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-sm-12">
-                                    <div class="btn-group">
-                                        <button id="roku-left" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-left"></span></button>
-                                        <button id="roku-select" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ok"></span></button>
-                                        <button id="roku-right" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-chevron-right"></span></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-sm-offset-4" style="text-align: center">
-                                    <button id="roku-down" class="btn btn-default btn-lg btn-down"><span class="glyphicon glyphicon-chevron-down"></span></button>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 20px;">
-                                <div class="col-sm-12" style="text-align: center">
-                                    <div class="btn-group">
-                                        <button id="roku-instantreplay" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-repeat"></span></button>
-                                        <button id="roku-info" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-asterisk"></span></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 15px;">
-                                <div class="col-sm-12">
-                                    <div class="btn-group">
-                                        <button id="roku-rev" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-backward"></span></button>
-                                        <button id="roku-play" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-play"></span></button>
-                                        <button id="roku-fwd" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-forward"></span></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div><!-- /.col-sm-4 -->
             </div>
         </div>
