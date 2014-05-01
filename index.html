@@ -41,8 +41,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#">Power ON</a></li>
-                        <li class=""><a href="#">Power OFF</a></li>
+                        <li class=""><a href="#" class="power-button" data-pwr="ON" id="power-ON">Power ON</a></li>
+                        <li class=""><a href="#" class="power-button" data-pwr="OFF" id="power-STANDBY">Power OFF</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -263,6 +263,13 @@
                     setVolume(action);
                     updateInfo(true);
 				});
+
+                $('.power-button').bind('click', function(event){
+                    var that = $(this);
+                    var val = that.data('pwr');
+                    sendCmd("PutZone_OnOff/" + val);
+                    updateInfo(false);
+                });
 			});
 
             function setVolume(vol) {
@@ -274,6 +281,9 @@
             }
 
 			function updateInfo(set_slider){
+                $('.power-button').each(function(index, value){
+                    $(this).parent().removeClass('active');
+                });
 				$.ajax({
 					url: "/data/",
 					type: "GET",
@@ -282,6 +292,9 @@
 						
                         var vol = parseFloat(data.volume);
                         var input_source = data.input_source;
+                        var power_status = data.power_status;
+
+                        $("#power-" + power_status).parent().addClass('active');
 
                         $("#volume_value").html(vol);
                         if(set_slider){
