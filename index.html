@@ -86,6 +86,9 @@
                                                     <label id="SAT" class="btn btn-primary btn-block input_select">
                                                         <input id="input_roku" type="radio" name="source" value="SAT/CBL"> Roku
                                                     </label>
+                                                    <label id="TV" class="btn btn-primary input_select">
+                                                        <input id="input_wii" type="radio" name="source" value="TV"> Wii
+                                                    </label>
                                                     <label id="BD" class="btn btn-primary input_select">
                                                         <input id="input_ps2" type="radio" name="source" value="BD"> PS2
                                                     </label>
@@ -381,6 +384,8 @@
                             $("#NETHOME").addClass("active");
                         } else if (input_source === "Front") {
                             $("#AUX1").addClass("active");
+                        } else if (input_source === "Wii") {
+                            $("#TV").addClass("active");
                         }
 
                         $("#sound_mode_" + sound_mode + "_label").addClass("active");
