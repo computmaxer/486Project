@@ -46,5 +46,15 @@ def get_data():
     })
 
 
+@app.route('/set_source/<string:source>', methods=['POST'])
+def set_source(source):
+    headers = {'referer': MARANTZ_IP + '/MainZone/index.html'}
+    data = {
+        'cmd0': "PutZone_InputFunction/%s" % source
+    }
+    response = requests.post(MARANTZ_IP + '/MainZone/index.put.asp', data=data, headers=headers)
+    return json.dumps({'status': response.status_code})
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
