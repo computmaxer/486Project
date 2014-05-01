@@ -10,7 +10,7 @@ import logging
 
 
 MARANTZ_IP = 'http://172.16.2.220'
-ROKU_IP = "http://127.0.0.1:8060"
+ROKU_IP = "http://172.16.2.210:8060"
 
 app = Flask(__name__, static_url_path='/static/', static_folder='static')
 app.template_folder = './'

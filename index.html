@@ -1,4 +1,4 @@
-<html>
+    <html>
 	<head>
 		<title>Max's Apartment</title>
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
@@ -219,6 +219,10 @@
                 $.post("{{ roku_ip }}/keypress/right");
             });
 
+            $("#roku-select").on('click', function(event){
+                $.post("{{ roku_ip }}/keypress/select");
+            });
+
             $("#roku-instantreplay").on('click', function(event){
                 $.post("{{ roku_ip }}/keypress/instantreplay");
             });
@@ -283,7 +287,7 @@
                         $("#input_source").html(input_source);
                         $("#table_input").html(input_source);
 
-                        if (input_source === "CBL/SAT"){
+                        if (input_source === "Roku"){
                             $("#input_roku_label").addClass("active");
                         } else if (input_source === "Blu-ray/DVD") {
                             $("#input_ps2_label").addClass("active");
