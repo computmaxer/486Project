@@ -33,6 +33,7 @@ def get_data():
     volume = None
     input_source = None
     power_status = None
+    sound_mode = None
 
     if response.status_code < 300 and response.status_code >= 200:
         logging.warning(response.content)
@@ -44,10 +45,13 @@ def get_data():
                 input_source = child[0].text
             elif child.tag == "Power":
                 power_status = child[0].text
+            elif child.tag == "selectSurround":
+                sound_mode = child[0].text
     return json.dumps({
         'volume': volume + 80,
         'input_source': input_source,
         'power_status': power_status,
+        'sound_mode': sound_mode,
     })
 
 
@@ -57,6 +61,17 @@ def set_source():
     source = request.json.get('source')
     data = {
         'cmd0': "PutZone_InputFunction/%s" % source
+    }
+    response = requests.post(MARANTZ_IP + '/MainZone/index.put.asp', data=data, headers=headers)
+    return json.dumps({'status': response.status_code})
+
+
+@app.route('/send/', methods=['POST'])
+def send_cmd():
+    headers = {'referer': MARANTZ_IP + '/MainZone/index.html'}
+    cmd = request.json.get('cmd')
+    data = {
+        'cmd0': cmd
     }
     response = requests.post(MARANTZ_IP + '/MainZone/index.put.asp', data=data, headers=headers)
     return json.dumps({'status': response.status_code})
