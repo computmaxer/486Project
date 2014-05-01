@@ -32,6 +32,7 @@ def get_data():
 
     volume = None
     input_source = None
+    power_status = None
 
     if response.status_code < 300 and response.status_code >= 200:
         logging.warning(response.content)
@@ -41,9 +42,12 @@ def get_data():
                 volume = float(child[0].text)
             elif child.tag == "InputFuncSelect":
                 input_source = child[0].text
+            elif child.tag == "Power":
+                power_status = child[0].text
     return json.dumps({
         'volume': volume + 80,
         'input_source': input_source,
+        'power_status': power_status,
     })
 
 
