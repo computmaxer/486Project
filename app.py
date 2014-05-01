@@ -51,7 +51,7 @@ def get_data():
         'volume': volume + 80,
         'input_source': input_source,
         'power_status': power_status,
-        'sound_mode': sound_mode,
+        'sound_mode': sound_mode.strip().replace(" ", "_"),
     })
 
 
@@ -70,10 +70,14 @@ def set_source():
 def send_cmd():
     headers = {'referer': MARANTZ_IP + '/MainZone/index.html'}
     cmd = request.json.get('cmd')
-    data = {
-        'cmd0': cmd
-    }
-    response = requests.post(MARANTZ_IP + '/MainZone/index.put.asp', data=data, headers=headers)
+    if cmd == "PutSurroundMode/MCHSTEREO":
+        response = requests.get(MARANTZ_IP + '/goform/formiPhoneAppDirect.xml?MSMCH%20STEREO')
+    else:
+        data = {
+            'cmd0': cmd
+        }
+
+        response = requests.post(MARANTZ_IP + '/MainZone/index.put.asp', data=data, headers=headers)
     return json.dumps({'status': response.status_code})
 
 
