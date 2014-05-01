@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 
 from flask import Flask
 from flask import render_template
+from flask import request
 
 import requests
 import logging
@@ -46,9 +47,10 @@ def get_data():
     })
 
 
-@app.route('/set_source/<string:source>', methods=['POST'])
-def set_source(source):
+@app.route('/set_source/', methods=['POST'])
+def set_source():
     headers = {'referer': MARANTZ_IP + '/MainZone/index.html'}
+    source = request.json.get('source')
     data = {
         'cmd0': "PutZone_InputFunction/%s" % source
     }
@@ -57,4 +59,4 @@ def set_source(source):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(debug=True)
