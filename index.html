@@ -69,25 +69,25 @@
                             <div style="text-align: center; margin-top: 20px;">
 
                                 <div class="btn-group-vertical btn-group-wide" id="toggle_sources" data-toggle="buttons">
-                                    <label id="input_roku_label" class="btn btn-primary btn-block" id="source_roku">
+                                    <label id="SAT/CBL" class="btn btn-primary btn-block input_select">
                                         <input id="input_roku" type="radio" name="source" value="SAT/CBL"> Roku
                                     </label>
-                                    <label id="input_ps2_label" class="btn btn-primary" id="source_roku">
+                                    <label id="BD" class="btn btn-primary input_select" id="source_roku" data="BD">
                                         <input id="input_ps2" type="radio" name="source" value="BD"> PS2
                                     </label>
-                                    <label id="input_xbox_label" class="btn btn-primary" id="source_roku">
+                                    <label id="GAME" class="btn btn-primary input_select" id="source_roku">
                                         <input id="input_xbox" type="radio" name="source" value="GAME"> Xbox
                                     </label>
-                                    <label id="input_atv_label" class="btn btn-primary" id="source_roku">
+                                    <label id="CD" class="btn btn-primary input_select" id="source_roku">
                                         <input id="input_atv" type="radio" name="source" value="CD"> AppleTV
                                     </label>
-                                    <label id="input_chromecast_label" class="btn btn-primary" id="source_chromecast">
+                                    <label id="MPLAY" class="btn btn-primary input_select" id="source_chromecast">
                                         <input id="input_chromecast" type="radio" name="source" name="MPLAY"> Chromecast
                                     </label>
-                                    <label id="input_network_label" class="btn btn-primary" id="source_chromecast">
+                                    <label id="NETHOME" class="btn btn-primary input_select" id="source_chromecast">
                                         <input id="input_network" type="radio" name="source" value="NETHOME"> Network
                                     </label>
-                                    <label id="input_aux_label" class="btn btn-primary" id="source_aux">
+                                    <label id="AUX1" class="btn btn-primary input_select" id="source_aux">
                                         <input id="input_aux" type="radio" name="source" value="AUX1"> Aux
                                     </label>
                                 </div>
@@ -195,6 +195,10 @@
                 }
             });
 
+            $('.input_select').on('click', function(event){
+                $.post("/set_source/", {"source": event.currentTarget.id})
+            });
+
             $("#roku-back").on('click', function(event){
                 $.post("{{ roku_ip }}/keypress/back");
             });
@@ -299,11 +303,11 @@
                             $("#input_xbox_label").addClass("active");
                         } else if (input_source === "CD") {
                             $("#input_atv_label").addClass("active");
-                        } else if (input_source === "MEDIA PLAYER") {
+                        } else if (input_source === "ChromeCast") {
                             $("#input_chromecast_label").addClass("active");
                         } else if (input_source === "NETWORK") {
                             $("#input_network_label").addClass("active");
-                        } else if (input_source === "TV AUDIO") {
+                        } else if (input_source === "Front") {
                             $("#input_aux_label").addClass("active");
                         }
 					}
