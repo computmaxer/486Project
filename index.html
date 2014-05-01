@@ -192,11 +192,18 @@
                     input = "SAT/CBL";
                 }
 
+                var timeout = 50;
+                console.log(input);
+                if (input === "NETHOME") {
+                    timeout = 1500;
+                }
+                console.log(timeout);
+
                 $.ajax({
                     type: 'POST',
                     url: '/set_source/',
                     data: JSON.stringify({"source": input}),
-                    success: setTimeout(function(){updateInfo(false)}, 100),
+                    success: setTimeout(function(){updateInfo(false)}, timeout),
                     contentType: "application/json",
                     dataType: 'json'
                 });
